@@ -36,6 +36,7 @@ out
 
 build
 
+**/Makefile
 **/CMakeFiles
 **/CMakeCache.txt
 Testing
