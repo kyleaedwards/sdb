@@ -6,13 +6,6 @@
 #include <sys/types.h>
 
 namespace sdb {
-    struct stop_reason {
-        stop_reason(int wait_status);
-
-        ProcessState reason;
-        std::uint8_t info;
-    };
-
     enum class ProcessState {
         Stopped,
         Running,
@@ -43,6 +36,13 @@ namespace sdb {
         // Private constructor
         Process(pid_t pid, bool terminate_on_end)
             : pid_(pid), terminate_on_end_(terminate_on_end) {}
+    };
+
+    struct stop_reason {
+        stop_reason(int wait_status);
+
+        ProcessState reason;
+        std::uint8_t info;
     };
 }
 
