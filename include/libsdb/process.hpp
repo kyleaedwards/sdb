@@ -13,6 +13,13 @@ namespace sdb {
         Terminated
     };
 
+    struct stop_reason {
+        stop_reason(int wait_status);
+
+        ProcessState reason;
+        std::uint8_t info;
+    };
+
     class Process {
     public:
         static std::unique_ptr<Process> launch(std::filesystem::path program_path);
@@ -36,13 +43,6 @@ namespace sdb {
         // Private constructor
         Process(pid_t pid, bool terminate_on_end)
             : pid_(pid), terminate_on_end_(terminate_on_end) {}
-    };
-
-    struct stop_reason {
-        stop_reason(int wait_status);
-
-        ProcessState reason;
-        std::uint8_t info;
     };
 }
 
