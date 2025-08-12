@@ -1,4 +1,5 @@
-#include <libsdb/libsdb.hpp>
+#include <libsdb/process.hpp>
+#include <libsdb/error.hpp>
 #include <iostream>
 #include <unistd.h>
 #include <sys/types.h>
@@ -8,6 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <string.h>
 // #include <sys/ptrace.h>
 
 namespace {
@@ -52,8 +54,8 @@ namespace {
         auto command = args[0];
 
         if (is_prefix(command, "continue")) {
-            process->resume(pid);
-            auto reason = process->wait_on_signal(pid);
+            process->resume();
+            auto reason = process->wait_on_signal();
             print_stop_reason(*process, reason);
         } else {
             std::cerr << "Unknown command: " << command << "\n";
